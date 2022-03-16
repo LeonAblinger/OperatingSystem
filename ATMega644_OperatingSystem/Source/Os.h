@@ -12,9 +12,6 @@
 #include "OsBackgroundTask.h"
 
 TBool
-OsInit(void);
-
-TBool
-OsInit(void);
+OSInit(void);
 
 #endif
