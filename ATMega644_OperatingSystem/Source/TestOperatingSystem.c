@@ -23,13 +23,11 @@ int main(void)
 typedef struct 
 {
 	unsigned int Counter;
-	unsigned int OldCounter;
 } TUserData1;
 
 void TestTask1(void * aUserData){
 	TUserData1 * UserData = ( TUserData1 * ) aUserData;
 	
-	UserData->OldCounter = UserData->Counter;
 	UserData->Counter++;
 }
 
