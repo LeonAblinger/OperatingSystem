@@ -1,9 +1,10 @@
-/*
- * OsBackgroundTask.c
- *
- * Created: 09/03/2022 14:28:48
- * Author : Jakob
- */ 
+/********************************************************************
+ Project: OperatingSystem
+ File:    OsBackgroundTask.c
+ Created: 09/03/2022
+ Author:  Leon Ablinger / AblL
+ *******************************************************************/
+
 #include <string.h>
 #include <stdlib.h>
 #include "OsBackgroundTask.h"

@@ -1,9 +1,10 @@
-/*
- * Os.h
- *
- * Created: 09/03/2022 14:28:48
- * Author : jakob
- */ 
+/********************************************************************
+ Project: OperatingSystem
+ File:    Os.h
+ Created: 09/03/2022
+ Author:  Leon Ablinger / AblL
+ *******************************************************************/
+
 #ifndef OS_H
 #define OS_H
 

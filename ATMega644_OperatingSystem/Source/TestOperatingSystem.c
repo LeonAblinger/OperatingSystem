@@ -1,9 +1,9 @@
-/*
- * TestOperatingSystem.c
- *
- * Created: 09/03/2022 14:28:48
- * Author : jakob
- */ 
+/********************************************************************
+ Project: OperatingSystem
+ File:    TestOperatingSystem.c
+ Created: 09/03/2022
+ Author:  Leon Ablinger / AblL
+ *******************************************************************/
 
 #include <avr/io.h>
 #include "Os.h"
@@ -23,11 +23,13 @@ int main(void)
 typedef struct 
 {
 	unsigned int Counter;
-}TUserData1;  
+	unsigned int OldCounter;
+} TUserData1;
 
 void TestTask1(void * aUserData){
 	TUserData1 * UserData = ( TUserData1 * ) aUserData;
 	
+	UserData->OldCounter = UserData->Counter;
 	UserData->Counter++;
 }
 
@@ -51,6 +53,7 @@ void TestBgTask1(void)
 	{
 		OSBackgroundTaskExecute();
 		
+		/*
 		if(UserData1.Counter == 1) // delete first
 		{
 			OSBackgroundTaskRemove(TestTask1, &UserData1);
@@ -68,5 +71,6 @@ void TestBgTask1(void)
 			OSBackgroundTaskRemove(TestTask1, &UserData3);
 			UserData3.Counter++;
 		}
+		*/
 	}
 }
