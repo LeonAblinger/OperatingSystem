@@ -10,7 +10,7 @@
 #include "OsBackgroundTask.h"
 
 TBool
-OsInit(void)
+OSInit(void)
 {
 	OSBackgroundTaskInit();	
 	

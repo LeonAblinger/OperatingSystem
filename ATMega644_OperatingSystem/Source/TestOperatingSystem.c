@@ -10,7 +10,7 @@
 
 void TestBgTask1(void);
 
-void TestTask1(void * UserData);
+void TestTask(void * UserData);
 
 int main(void)
 {
@@ -25,7 +25,7 @@ typedef struct
 	unsigned int Counter;
 } TUserData1;
 
-void TestTask1(void * aUserData){
+void TestTask(void * aUserData){
 	TUserData1 * UserData = ( TUserData1 * ) aUserData;
 	
 	UserData->Counter++;
@@ -33,8 +33,8 @@ void TestTask1(void * aUserData){
 
 void TestBgTask1(void)
 {
-	OsInit();
-	
+	OSInit();
+
 	TUserData1 UserData1;
 	UserData1.Counter = 0;
 	TUserData1 UserData2;
@@ -42,33 +42,48 @@ void TestBgTask1(void)
 	TUserData1 UserData3;
 	UserData3.Counter = 0;
 	
-	OSBackgroundTaskAddTask( TestTask1, &UserData1 );
-	OSBackgroundTaskAddTask( TestTask1, &UserData2 );
-	OSBackgroundTaskAddTask( TestTask1, &UserData3 );
-
-	
-	while ( 1 )
+	// Simple functionality test
 	{
-		OSBackgroundTaskExecute();
-		
-		/*
-		if(UserData1.Counter == 1) // delete first
+		OSBackgroundTaskAddTask(TestTask, &UserData1 );
+		OSBackgroundTaskAddTask(TestTask, &UserData2 );
+		OSBackgroundTaskAddTask(TestTask, &UserData3 );
+
+		while ( 1 )
 		{
-			OSBackgroundTaskRemove(TestTask1, &UserData1);
-			UserData1.Counter++;
-		}
+			OSBackgroundTaskExecute();
 		
-		if(UserData2.Counter == 2) //delete second
-		{
-			OSBackgroundTaskRemove(TestTask1, &UserData2);
-			UserData2.Counter++;
-		}
+			if (UserData1.Counter == 5) OSBackgroundTaskRemove(TestTask, &UserData1);
 		
-		if(UserData3.Counter == 3) // delete third
-		{
-			OSBackgroundTaskRemove(TestTask1, &UserData3);
-			UserData3.Counter++;
+			if (UserData2.Counter == 7) OSBackgroundTaskRemove(TestTask, &UserData2);
+		
+			if (UserData3.Counter == 9) 
+			{
+				OSBackgroundTaskRemove(TestTask, &UserData3);
+				break;
+			}
 		}
-		*/
+	}
+	
+	// Advanced memory test
+	{
+		int i, loop;
+		
+		while ( 1 )
+		{
+			for (loop = 0; i < 100; i++)
+			{
+				OSBackgroundTaskAddTask(TestTask, &UserData1);
+				OSBackgroundTaskAddTask(TestTask, &UserData2);
+				OSBackgroundTaskAddTask(TestTask, &UserData3);
+				
+				for  (i = 0; i < 9; i++) OSBackgroundTaskExecute();
+				OSBackgroundTaskRemove(TestTask, &UserData1);
+				for  (i = 0; i < 9; i++) OSBackgroundTaskExecute();
+				OSBackgroundTaskRemove(TestTask, &UserData2);
+				for  (i = 0; i < 9; i++) OSBackgroundTaskExecute();
+				OSBackgroundTaskRemove(TestTask, &UserData3);
+				for  (i = 0; i < 3; i++) OSBackgroundTaskExecute();
+			}
+		}
 	}
 }
