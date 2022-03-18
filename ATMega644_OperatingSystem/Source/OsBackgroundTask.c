@@ -60,17 +60,19 @@ TBool
 OSBackgroundTaskRemove(  TBgFunction	aFunction,
 						 void *			aUserData )
 {
-// Function to remove task from background task list
-	if ( ! BgList.First ) // list is empty 
+	if (!BgList.First) // If first element is false -> list doesn't exist
 		return EFALSE;
 		
 	TBgElement nextElement = BgList.First;
 	TBgElement lastElement = BgList.First;
 
-	while( nextElement != NULL) // check for end of list
+	while(nextElement != NULL) // If end of list is reached
 	{
-		if ( nextElement->Function == aFunction && nextElement->UserData == aUserData)
+		if (nextElement->Function == aFunction && nextElement->UserData == aUserData)
 		{
+			if (BgList.ExecuteNext == nextElement)
+				BgList.ExecuteNext = nextElement->Next;
+				
 			if (nextElement == BgList.First)
 			{
 				BgList.First = nextElement->Next;
@@ -78,19 +80,15 @@ OSBackgroundTaskRemove(  TBgFunction	aFunction,
 					BgList.First = NULL;
 			} 
 			else
-			{
 				lastElement->Next = nextElement->Next;
-			}
-			
-			free(nextElement); // delete element from memory
+				
+			free(nextElement); // Delete element
 			BgList.Size -= 1;
 			return ETRUE;
 		}
-		
 		lastElement = nextElement;
 		nextElement = nextElement->Next;
 	}
-
 	return EFALSE;
 }
 
