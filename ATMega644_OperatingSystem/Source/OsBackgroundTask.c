@@ -92,10 +92,10 @@ OSBackgroundTaskRemove(  TBgFunction	aFunction,
 	return EFALSE;
 }
 
+// Executing the next background task
 void
 OSBackgroundTaskExecute( void )
 {
-// Function to start the next background task
 	if ( !BgList.ExecuteNext )
 		BgList.ExecuteNext = BgList.First;
 		
