@@ -30,70 +30,67 @@ void *         Timer644FunctionTimer1CaptureUserData;
 
 /**** Declaration of private functions */
 static TBool
-Timer644Init_(
-unsigned long aCpuClk,
-unsigned long aTimerIntervall );
+Timer644Init_(TTimerInitParams aParams );
 
 static TBool
 Timer644Init0(
-unsigned long aCpuClk,
-unsigned long aTimerIntervall,
-TTimer644Mode    aMode );
+	unsigned long aCpuClk,
+	unsigned long aTimerIntervall,
+	TTimer644Mode aMode );
 
 static TBool
 Timer644Init1(
-unsigned long aCpuClk,
-unsigned long aTimerIntervall,
-TTimer644Mode    aMode );
+	unsigned long aCpuClk,
+	unsigned long aTimerIntervall,
+	TTimer644Mode aMode );
 
 static void
 Timer644CalculatePrescalerNormalMode(
-  unsigned long   aCpuClk,
-  unsigned long   aTimerIntervall,
-  unsigned char * aPrescaler );
+	unsigned long   aCpuClk,
+	unsigned long   aTimerIntervall,
+	unsigned char * aPrescaler );
 
 static void
 Timer644CalculatePrescalerTimer1NormalMode(
-unsigned long   aCpuClk,
-unsigned long   aTimerIntervall,
-unsigned char * aPrescaler );
+	unsigned long   aCpuClk,
+	unsigned long   aTimerIntervall,
+	unsigned char * aPrescaler );
 
 
 static void
 Timer644CalculateCompareRegister(
-unsigned long   aCpuClk,
-unsigned long   aTimerIntervall,
-unsigned char * aCompareRegister,
-unsigned char * aPrescaler );
+	unsigned long   aCpuClk,
+	unsigned long   aTimerIntervall,
+	unsigned char * aCompareRegister,
+	unsigned char * aPrescaler );
 
 static void
 Timer644CalculateCompareRegisterTimer1(
-unsigned long   aCpuClk,
-unsigned long   aTimerIntervall,
-unsigned int  * aCompareRegister,
-unsigned char * aPrescaler );
+	unsigned long   aCpuClk,
+	unsigned long   aTimerIntervall,
+	unsigned int  * aCompareRegister,
+	unsigned char * aPrescaler );
 
 static TBool
-  Timer644SetInterruptFunction_(
-  TTimerFunction    aFunction,
-  void *            aUserData );
+Timer644SetInterruptFunction_(
+	TTimerFunction  aFunction,
+	void *			aUserData );
 
 void
 Timer644GetInterface(
   TTimerInterface * aInterface )
 {
-  aInterface->Init        = Timer644Init_;
-  aInterface->SetFunction = Timer644SetInterruptFunction_;
-  aInterface->Start       = 0;
-  aInterface->Stop        = 0;
+  aInterface->Init					= Timer644Init_;
+  aInterface->SetInterruptFunction	= Timer644SetInterruptFunction_;
+  aInterface->Start					= 0;
+  aInterface->Stop					= 0;
 }
 
 static TBool
-Timer644Init_( 
- unsigned long aCpuClk,
- unsigned long aTimerIntervall )
+Timer644Init_(
+	TTimerInitParams aParams )
  {
-   return Timer644Init( aCpuClk, aTimerIntervall, TIMER_MODE_CTC, TIMER_NO_0 );
+   return Timer644Init( aParams.CpuClk, aParams.Resolution, TIMER_MODE_CTC, TIMER_NO_0 );
  }
 
 

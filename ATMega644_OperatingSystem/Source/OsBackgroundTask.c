@@ -18,8 +18,7 @@ static TBgtListHeader BgList;
 void
 OSBackgroundTaskInit( void )
 {
-	memset( &BgList, 0, sizeof(BgList)); // allocate and set to 0
-
+	memset(&BgList, 0, sizeof(BgList)); // allocate and set to 0
 }
 
 TBool

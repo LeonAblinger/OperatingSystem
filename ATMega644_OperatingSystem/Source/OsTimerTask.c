@@ -10,13 +10,21 @@
 #include "HTLStddef.h"
 #include "OsTimerTask.h"
 
-OsTimerTaskInit(
+TBool OsTimerTaskInit(
 	unsigned long aCpuClk,
 	unsigned long aTimerInterval
-	);
+);
+
+TBool OsTimerTaskAddTask(
+	TTimerTaskFunction aFunction,
+	void *			   aUserData
+);
+
+TBool OsTimerTaskRemoveTask(
+	TTimerTaskFunction aFunction,
+	void *			   aUserData
+);
 	
-OsTimerTaskAddTask();
-OsTimerTaskRemoveTask();
-	
-OsTimerTaskStart();
-OsTimerTaskStop();
+void OsTimerTaskStart(void);
+
+void OsTimerTaskStop(void);
