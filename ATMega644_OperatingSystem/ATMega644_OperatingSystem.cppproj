@@ -202,6 +202,22 @@
       <SubType>compile</SubType>
       <Link>TestOperatingSystem.c</Link>
     </Compile>
+    <Compile Include="Source\Timer.c">
+      <SubType>compile</SubType>
+      <Link>Timer.c</Link>
+    </Compile>
+    <Compile Include="Source\Timer644.c">
+      <SubType>compile</SubType>
+      <Link>Timer644.c</Link>
+    </Compile>
+    <Compile Include="Source\Timer644.h">
+      <SubType>compile</SubType>
+      <Link>Timer644.h</Link>
+    </Compile>
+    <Compile Include="Source\TimerInterface.h">
+      <SubType>compile</SubType>
+      <Link>TimerInterface.h</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
