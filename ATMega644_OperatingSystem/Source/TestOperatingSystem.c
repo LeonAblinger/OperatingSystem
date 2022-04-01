@@ -7,6 +7,7 @@
 
 #include <avr/io.h>
 #include "Os.h"
+#include "OsBackgroundTask.h"
 
 void TestBgTask1(void);
 
@@ -70,7 +71,7 @@ void TestBgTask1(void)
 		
 		while ( 1 )
 		{
-			for (loop = 0; i < 100; i++)
+			for (loop = 0; loop < 100; loop++)
 			{
 				OSBackgroundTaskAddTask(TestTask, &UserData1);
 				OSBackgroundTaskAddTask(TestTask, &UserData2);
